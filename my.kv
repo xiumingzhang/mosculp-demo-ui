@@ -1,0 +1,198 @@
+#:kivy 1.0
+#:import resource_find kivy.resources.resource_find
+#:import results_dir app_config.results_dir
+
+#:set font_file 'cmunbbx.ttf'
+#:set tick_file 'blue-tick.png'
+#:set circle_file 'blue-circle.png'
+#:set kivy_blue (0.15, 0.71, 0.91, 1)
+#:set hmenu_height_rel 0.1
+#:set vmenu_width_rel 0.4
+#:set font_size 15
+#:set text_width_rel 0.9
+
+
+ScreenManager:
+    ModelScreen:
+        id: model_screen
+        name: '3d'
+    RenderScreen:
+        id: render_screen
+        name: 'render'
+
+
+<ScreenTab>:
+    rows: 1
+    spacing: 0, 0
+    size_hint_y: hmenu_height_rel
+
+
+<ModelScreen>:
+    tab: tab
+    viewer: viewer
+    menu: menu
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 0
+        ScreenTab:
+            id: tab
+        Interactive:
+            id: viewer
+        HorizontalMenu:
+            id: menu
+
+
+<RenderScreen>:
+    tab: tab
+    side_menu: side_menu
+    viewer: viewer
+    menu: menu
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 0
+        ScreenTab:
+            id: tab
+        BoxLayout:
+            VerticalMenu:
+                id: side_menu
+            Picture:
+                id: viewer
+        HorizontalMenu:
+            id: menu
+
+
+<Picture>:
+    img: img
+    Image:
+    #AsyncImage:
+        allow_stretch: True
+        #nocache: True
+        id: img
+
+
+<Interactive>:
+    renderer: renderer
+    Renderer:
+        id: renderer
+
+
+<HorizontalMenu>:
+    rows: 1
+    spacing: 0, 0
+    size_hint_y: hmenu_height_rel
+
+
+<VerticalMenu>:
+    orientation: 'vertical'
+    spacing: 0, 0
+    size_hint_x: vmenu_width_rel
+
+
+<MyDropdown>:
+
+
+<MyDropdownButton>:
+    background_normal: ''
+    font_name: resource_find(font_file)
+    font_size: font_size
+    text_size: text_width_rel * self.width, None
+    halign: 'center'
+    valign: 'middle'
+    size_hint_y: None
+
+
+<MyButton>:
+    background_normal: ''
+    background_color: 0, 0, 0, 0
+    font_name: resource_find(font_file)
+    font_size: font_size
+    text_size: text_width_rel * self.width, None
+    halign: 'center'
+    valign: 'middle'
+
+
+<MyToggleButton>:
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    font_name: resource_find(font_file)
+    font_size: font_size
+    text_size: text_width_rel * self.width, None
+    halign: 'left'
+    valign: 'middle'
+    state: 'down'
+
+
+<MySwitchButton>:
+    background_normal: ''
+    background_down: ''
+    font_name: resource_find(font_file)
+    font_size: font_size
+    text_size: text_width_rel * self.width, None
+    halign: 'center'
+    valign: 'middle'
+
+
+<MyCheckbox>:
+    rows: 1
+    CheckBox:
+        id: checkbox
+        size_hint_x: 0.2
+        font_name: resource_find(font_file)
+        font_size: font_size
+        state: 'down'
+        allow_no_selection: False
+        background_checkbox_down: resource_find(tick_file)
+        background_radio_down: resource_find(circle_file)
+    MyLabel:
+        id: label
+
+
+<MyTitleLabel>:
+    valign: 'top'
+
+
+<MyLabel>:
+    font_name: resource_find(font_file)
+    font_size: font_size
+    text_size: text_width_rel * self.width, self.height
+    halign: 'left'
+    valign: 'middle'
+
+
+<FloatSlider>:
+    min: 0
+    max: 1
+    step: 0.2
+    value: 0
+    size_hint_x: 0.4
+
+
+<FrameSlider>:
+    min: 1
+    step: 1
+    value: 1
+
+
+<MyTextInput>:
+    foreground_color: 1, 1, 1, 1
+    background_color: 0, 0, 0, 0
+    cursor_color: kivy_blue
+    hint_text_color: 1, 1, 1, 1
+    font_name: resource_find(font_file)
+    font_size: font_size
+    padding_y: [(self.height - self.line_height) / 2.0, 0]
+
+
+<FloatTextInput>:
+    input_filter: 'float'
+    size_hint_x: 1
+    size_hint_x: 0.1
+    padding_x: [0.35 * self.width, 0]
+    hint_text: "0"
+
+
+<FrameTextInput>:
+    input_filter: 'int'
+    size_hint_x: 0.1
+    hint_text: "1"
