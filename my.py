@@ -350,7 +350,7 @@ class FloatTextInput(MyTextInput):
         try:
             v = float(value)
         except ValueError:
-            Logger.warn("Failed to convert '%s' to float" % value)
+            Logger.warning("Failed to convert '%s' to float" % value)
             v = None
         if v is not None:
             v = min(max(v, 0), 1)
@@ -369,7 +369,7 @@ class FrameTextInput(MyTextInput):
         try:
             v = int(value)
         except ValueError:
-            Logger.warn("Failed to convert '%s' to int" % value)
+            Logger.warning("Failed to convert '%s' to int" % value)
             v = None
         if v is not None:
             v = int(min(max(v, 1), self.slider.max))
